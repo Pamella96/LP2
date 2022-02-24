@@ -24,6 +24,8 @@ class Hello2DFrame extends JFrame {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.green);
+        g2d.fillRect(0, 0, 350, 350);
         g2d.setPaint(Color.yellow);
         int w = getWidth();
         int h = getHeight();
@@ -33,5 +35,6 @@ class Hello2DFrame extends JFrame {
         g2d.fillArc(120, 120, 100, 100, 0, 180);
         g2d.setPaint(Color.white);
         g2d.fillArc(120, 120, 100, 100, 180, 180);
+
     }
 }
