@@ -14,7 +14,8 @@ class ListApp {
 }
 
 class ListFrame extends JFrame {
-    ArrayList<Figure> figs = new ArrayList<Figure>();
+    ArrayList<Rect> rect = new ArrayList<Rect>();
+    ArrayList<Ellipse> ellip = new ArrayList<Ellipse>();
     Random rand = new Random();
 
     ListFrame() {
@@ -28,17 +29,25 @@ class ListFrame extends JFrame {
         this.addKeyListener(
                 new KeyAdapter() {
                     public void keyPressed(KeyEvent evt) {
-                        int x = rand.nextInt(350);
-                        int y = rand.nextInt(350);
-                        int w = rand.nextInt(50);
-                        int h = rand.nextInt(50);
                         if (evt.getKeyChar() == 'r') {
-                            Rect r = new Rect(x, y, w, h);
-                            figs.add(r);
-                        } else if (evt.getKeyChar() == 'e') {
-                            figs.add(new Ellipse(x, y, w, h));
+                            int x = rand.nextInt(350);
+                            int y = rand.nextInt(350);
+                            int w = rand.nextInt(50);
+                            int h = rand.nextInt(50);
+
+                            rect.add(new Rect(x, y, w, h)); // outer.rs.add();
+                            repaint(); // outer.repaint()
                         }
-                        repaint();
+
+                        if (evt.getKeyChar() == 'e') {
+                            int x = rand.nextInt(350);
+                            int y = rand.nextInt(350);
+                            int w = rand.nextInt(50);
+                            int h = rand.nextInt(50);
+
+                            ellip.add(new Ellipse(x, y, w, h)); // outer.el.add();
+                            repaint(); // outer.repaint()
+                        }
                     }
                 });
 
@@ -48,8 +57,12 @@ class ListFrame extends JFrame {
 
     public void paint(Graphics g) {
         super.paint(g);
-        for (Figure fig : this.figs) {
-            fig.paint(g);
+        for (Figure rect : this.rect) {
+            rect.paint(g);
+        }
+
+        for (Figure ellip : this.ellip) {
+            ellip.paint(g);
         }
     }
 }
