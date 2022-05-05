@@ -16,10 +16,8 @@ class ListApp {
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     Random rand = new Random();
-    DragPanel dragPanel = new DragPanel();
 
     ListFrame() {
-
         this.addWindowListener(
                 new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {
@@ -36,19 +34,15 @@ class ListFrame extends JFrame {
                         int h = rand.nextInt(50);
 
                         if (evt.getKeyChar() == 'r') {
-                            Rect r = new Rect(x, y, w, h);
+                            Rect r = new Rect(x, y, w, h, Color.RED, Color.BLACK);
                             figs.add(r);
-                        } else if (evt.getKeyChar() == 'e') {
-                            Ellipse e = new Ellipse(x, y, w, h);
-                            figs.add(e);
                         }
                         repaint();
                     }
                 });
-        this.add(dragPanel);
-        this.setTitle("projeto");
+
+        this.setTitle("Lista de Figuras");
         this.setSize(350, 350);
-        this.setVisible(true);
     }
 
     public void paint(Graphics g) {
