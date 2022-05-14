@@ -9,7 +9,7 @@ import java.util.Random;
 
 import figures.*;
 
-class GraphicsEditor {
+class ListApp {
     public static void main(String[] args) {
         ListFrame frame = new ListFrame();
         frame.setVisible(true);
