@@ -1,21 +1,3 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import Panels.*;
-import listeners.*;
-
-import java.util.ArrayList;
-import java.util.Random;
-
-import figures.*;
-
-class ListApp {
-    public static void main(String[] args) {
-        ListFrame frame = new ListFrame();
-        frame.setVisible(true);
-    }
-}
-
 class ListFrame extends JFrame {
     private static final long serialVersionUID = 1L;
     ArrayList<Figure> figs = new ArrayList<Figure>();
@@ -88,11 +70,3 @@ class ListFrame extends JFrame {
                 });
 
     }
-
-    public void paint(Graphics g) {
-        super.paint(g);
-        for (Figure fig : this.figs) {
-            fig.paint(g);
-        }
-    }
-}
