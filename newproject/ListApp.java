@@ -22,17 +22,17 @@ class ListFrame extends JFrame {
     ArrayList<Button> buts = new ArrayList<Button>();
 
     Random rand = new Random();
-    Rect aux = new Rect(0, 0, 13, 13, 255, 238);
+    Rect eix = new Rect(0, 0, 13, 13, 255, 238);
     Point mouse = null;
     Point PositionMouse = null;
     Figure focused = null;
-    Figure focusedAux = null;
+    Figure focusedEix = null;
     Button focus_but = null;
     boolean clickedBut = false;
-    boolean but_aux = false;
+    boolean but_eix = false;
     int cont = 0;
     int i, x, y, w, h, colorFill, colorBorder, posx = 0, posy = 0, indice;
-    boolean auxKey = false;
+    boolean eixKey = false;
 
     ListFrame() {
 
@@ -75,13 +75,13 @@ class ListFrame extends JFrame {
                     public void mousePressed(MouseEvent evt) {
 
                         focused = null;
-                        auxKey = false;
+                        eixKey = false;
                         mouse = evt.getPoint();
 
-                        if (but_aux && focus_but != null) {
+                        if (but_eix && focus_but != null) {
                             if (!(mouse.x < 60 && mouse.y < 680) && focus_but.idx != 9 && focus_but.idx != 12) {
                                 figureBut(focus_but.idx, mouse.x, mouse.y);
-                                but_aux = false;
+                                but_eix = false;
                                 focus_but = null;
                             }
                             repaint();
@@ -90,7 +90,7 @@ class ListFrame extends JFrame {
                         for (Button but : buts) {
                             if (but.clicked(mouse.x, mouse.y)) {
                                 focus_but = but;
-                                but_aux = true;
+                                but_eix = true;
 
                                 if (but.idx > 4) {
                                     figureBut(focus_but.idx, mouse.x, mouse.y);
@@ -101,7 +101,7 @@ class ListFrame extends JFrame {
                         for (int i = 0; i < figs.size(); i++) {
                             if (figs.get(i).clicked(mouse.x, mouse.y)) {
                                 focused = figs.get(i);
-                                focusedAux = focused;
+                                focusedEix = focused;
 
                             } else {
                                 if (focused != null) {
@@ -227,9 +227,9 @@ class ListFrame extends JFrame {
             fig.paint(g, fig == focused);
         }
         if (focused != null) {
-            aux.x = focused.x + (focused.w + 13);
-            aux.y = focused.y + (focused.h + 13);
-            aux.paint(g, true);
+            eix.x = focused.x + (focused.w + 13);
+            eix.y = focused.y + (focused.h + 13);
+            eix.paint(g, true);
 
         }
     }
