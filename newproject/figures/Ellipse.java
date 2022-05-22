@@ -8,8 +8,8 @@ public class Ellipse extends Figure {
     public int x, y;
     public int w, h;
 
-    public Ellipse(int x, int y, int w, int h, int corDeBorda, int corDePreenchimento) {
-        super(x, y, corDeBorda, corDePreenchimento, corDePreenchimento, corDePreenchimento);
+    public Ellipse(int x, int y, int w, int h, int colorBorder, int colorFill) {
+        super(x, y, colorBorder, colorFill, colorFill, colorFill);
         this.w = w;
         this.h = h;
 
@@ -23,10 +23,10 @@ public class Ellipse extends Figure {
     public void paint(Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(new Color(this.corDePreenchimento));
+        g2d.setColor(new Color(this.colorFill));
         g2d.fill(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
         g2d.setStroke(new BasicStroke(2));
-        g2d.setColor(new Color(this.corDeBorda));
+        g2d.setColor(new Color(this.colorBorder));
         g2d.draw(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
 
         if (focused) {

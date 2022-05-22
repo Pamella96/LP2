@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 import java.lang.String;
 import java.io.*;
-
+import javax.swing.JOptionPane;
 import figures.*;
 
 class ListApp {
@@ -22,23 +22,24 @@ class ListFrame extends JFrame {
     ArrayList<Button> buts = new ArrayList<Button>();
 
     Random rand = new Random();
+    Rect aux = new Rect(0, 0, 13, 13, 255, 238);
     Point mouse = null;
     Point PositionMouse = null;
     Figure focused = null;
     Figure focusedAux = null;
     Button focus_but = null;
     boolean clickedBut = false;
-    boolean auxB = false;
+    boolean but_aux = false;
     int cont = 0;
-    int i, x, y, w, h, corDePreenchimento, corDeBorda, posx = 0, posy = 0, indice;
+    int i, x, y, w, h, colorFill, colorBorder, posx = 0, posy = 0, indice;
     boolean auxKey = false;
 
     ListFrame() {
 
         buts.add(new Button(0, new Rect(0, 0, 0, 0, 0, 0)));
         buts.add(new Button(1, new Ellipse(50, 50, 0, 0, 0, 0)));
-        buts.add(new Button(2, new Linha(50, 50, 0, 0, 0, 0)));
-        buts.add(new Button(3, new Text("T", 0, 0, 0, 0, 0, 0)));
+        buts.add(new Button(2, new Line(50, 50, 0, 0, 0, 0)));
+        buts.add(new Button(3, new Triangle(0, 0, 0, 0, 0, 0)));
         buts.add(new Button(4, new ButtonT("Clear", 0, 0, 0, 0, 0, 0)));
 
         try {
@@ -77,18 +78,19 @@ class ListFrame extends JFrame {
                         auxKey = false;
                         mouse = evt.getPoint();
 
-                        if (auxB && focus_but != null) {
+                        if (but_aux && focus_but != null) {
                             if (!(mouse.x < 60 && mouse.y < 680) && focus_but.idx != 9 && focus_but.idx != 12) {
                                 figureBut(focus_but.idx, mouse.x, mouse.y);
-                                auxB = false;
+                                but_aux = false;
                                 focus_but = null;
                             }
+                            repaint();
                         }
 
                         for (Button but : buts) {
                             if (but.clicked(mouse.x, mouse.y)) {
                                 focus_but = but;
-                                auxB = true;
+                                but_aux = true;
 
                                 if (but.idx > 4) {
                                     figureBut(focus_but.idx, mouse.x, mouse.y);
@@ -141,20 +143,20 @@ class ListFrame extends JFrame {
                         int w = rand.nextInt(180);
                         int h = rand.nextInt(180);
 
-                        int corDeBorda = rand.nextInt(250);
-                        int corDePreenchimento = rand.nextInt(150);
+                        int colorBorder = rand.nextInt(250);
+                        int colorFill = rand.nextInt(150);
 
                         if (evt.getKeyChar() == 'r') {
-                            focused = new Rect(x, y, w, h, corDeBorda, corDePreenchimento);
+                            focused = new Rect(x, y, w, h, colorBorder, colorFill);
                             figs.add(focused);
                         } else if (evt.getKeyChar() == 'e') {
-                            focused = new Ellipse(x, y, w, h, corDeBorda, corDePreenchimento);
+                            focused = new Ellipse(x, y, w, h, colorBorder, colorFill);
                             figs.add(focused);
                         } else if (evt.getKeyChar() == 'l') {
-                            focused = new Linha(x, y, w, h, corDeBorda, corDePreenchimento);
+                            focused = new Line(x, y, w, h, colorBorder, colorFill);
                             figs.add(focused);
                         } else if (evt.getKeyChar() == 't') {
-                            focused = new Text("projeto", x, y, w, h, corDeBorda, corDePreenchimento);
+                            focused = new Triangle(x, y, w, h, colorBorder, colorFill);
                             figs.add(focused);
                         }
 
@@ -180,26 +182,26 @@ class ListFrame extends JFrame {
 
         this.setTitle("Lista de Figuras");
         this.setSize(350, 350);
-        this.getContentPane().setBackground(Color.MAGENTA);
+        this.getContentPane().setBackground(Color.white);
     }
 
     public void figureBut(int idx, int x, int y) {
         if (idx == 0) {
-            Figure fig = new Rect(x, y, w, h, corDePreenchimento, corDeBorda);
+            Figure fig = new Rect(x, y, w, h, colorBorder, colorFill);
             figs.add(fig);
             focused = fig;
             indice = idx;
         } else if (idx == 1) {
-            Figure fig = new Ellipse(x, y, w, h, corDeBorda, corDePreenchimento);
+            Figure fig = new Ellipse(x, y, w, h, colorBorder, colorFill);
             figs.add(fig);
             focused = fig;
 
         } else if (idx == 2) {
-            Figure fig = new Linha(x, y, w, h, corDePreenchimento, corDeBorda);
+            Figure fig = new Line(x, y, w, h, colorBorder, colorFill);
             figs.add(fig);
             focused = fig;
         } else if (idx == 3) {
-            Figure fig = new Text("projeto", x, y, w, h, corDePreenchimento, corDeBorda);
+            Figure fig = new Triangle(x, y, w, h, colorBorder, colorFill);
             figs.add(fig);
             focused = fig;
 
@@ -223,6 +225,12 @@ class ListFrame extends JFrame {
         }
         for (Figure fig : this.figs) {
             fig.paint(g, fig == focused);
+        }
+        if (focused != null) {
+            aux.x = focused.x + (focused.w + 13);
+            aux.y = focused.y + (focused.h + 13);
+            aux.paint(g, true);
+
         }
     }
 }

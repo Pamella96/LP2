@@ -4,10 +4,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 
-public class Linha extends Figure {
+public class Line extends Figure {
 
-    public Linha(int x, int y, int w, int h, int corDePreenchimento, int corDeBorda) {
-        super(x, y, corDePreenchimento, corDeBorda, corDeBorda, corDeBorda);
+    public Line(int x, int y, int w, int h, int colorFill, int colorBorder) {
+        super(x, y, colorFill, colorBorder, colorBorder, colorBorder);
 
         this.w = 40;
         this.h = 40;
@@ -26,7 +26,7 @@ public class Linha extends Figure {
     public void paint(Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(new Color(this.corDePreenchimento));
+        g2d.setColor(new Color(this.colorFill));
         g2d.drawLine(this.x, this.y, this.x + this.w, this.y);
 
         if (focused) {

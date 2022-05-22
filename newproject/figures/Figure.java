@@ -9,18 +9,18 @@ import java.awt.Graphics;
 public abstract class Figure implements IVisible, Serializable {
     public int x, y;
     public int w, h;
-    protected int corDePreenchimento, corDeBorda;
+    protected int colorFill, colorBorder;
 
-    public Figure(int x, int y, int w, int h, int corDePreenchimento, int corDeBorda) {
+    public Figure(int x, int y, int w, int h, int colorFill, int colorBorder) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.corDePreenchimento = corDePreenchimento;
-        this.corDeBorda = corDeBorda;
+        this.colorFill = colorFill;
+        this.colorBorder = colorBorder;
     }
 
-    public Figure(int x2, int y2, Color corDePreenchimento2, Color corDeBorda2) {
+    public Figure(int x2, int y2, Color colorFill2, Color colorBorder2) {
     }
 
     public void drag(int dx, int dy) {
