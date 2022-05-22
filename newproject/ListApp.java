@@ -79,7 +79,7 @@ class ListFrame extends JFrame {
                         mouse = evt.getPoint();
 
                         if (but_eix && focus_but != null) {
-                            if (!(mouse.x < 60 && mouse.y < 680) && focus_but.idx != 9 && focus_but.idx != 12) {
+                            if (!(mouse.x < 60 && mouse.y < 550) && focus_but.idx != 8 && focus_but.idx != 6) {
                                 figureBut(focus_but.idx, mouse.x, mouse.y);
                                 but_eix = false;
                                 focus_but = null;
